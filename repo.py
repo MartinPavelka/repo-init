@@ -21,10 +21,10 @@ help = """	This script serves as a tool to quickly create and initialize a new g
 	Example of use:
 	repo -w bestappever
 """
-path = "" # Your local projects directory
+path = "YOUR_LOCAL_PROJECTS_REPOSITORY" # Your local projects directory
 repo_name = ""
 repo_type = ""
-token= "" # Your github token
+token= "YOUR_GITHUB_TOKEN" # Your github token
 g = Github(token)
 user = g.get_user()
 
@@ -49,12 +49,27 @@ def init_directory():
 	os.makedirs(repo_path)
 	os.chdir(repo_path)
 	create_readme()
-	r = git.Repo.init(os.getcwd())
+	subprocess.Popen('explorer "%s"' %os.path.normpath(repo_path))
+	git_push(os.getcwd())
+	# assert not empty_repo.delete_remote(origin).exists()
 	# TO DO: add readme, add remote origin, push -u origin master
+
+def git_push(cwd):
+	r = git.Repo.init(cwd, 'empty')
+	new_file_path = os.path.join(r.working_tree_dir, 'README.md')
+	r.index.add([new_file_path])                        # add it to the index
+	# Commit the changes to deviate masters history
+	r.index.commit("Added a new file in the past - for later merege")
+	origin = r.create_remote('origin', "Your_GITHUB_Address"+ repo_name +".git")
+	assert origin.exists()
+	assert origin == r.remotes.origin == r.remotes['origin']
+	origin.fetch()
+	r.git.push('--set-upstream', 'origin', 'master')
+	origin.push()
 
 def create_repo():
 	if name_available():
-		repo = user.create_repo(repo_name)
+		repo = user.create_repo(repo_name) #create github repository
 		print("The repo {} was created".format(repo_name))
 		init_directory()
 	else:
@@ -62,7 +77,7 @@ def create_repo():
 
 if __name__ == "__main__":
 	# Handle unexpected parameters
-	if "-h" in sys.argv or len(sys.argv) < 3 or len(sys.argv) > 3 or "-w" not in sys.argv or "-p" not in sys.argv: #How the hell do I shorten this
+	if "-h" == sys.argv[1] or len(sys.argv) < 3 or len(sys.argv) > 3:
 		print(help)
 		exit()
 	if "-w" == sys.argv[1]:
