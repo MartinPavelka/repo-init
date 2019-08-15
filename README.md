@@ -1,5 +1,5 @@
 # repo-init
-This script serves as a tool to quickly create and initialize a new git repository
+This script serves as a tool to quickly create and initialize a new git repository.
 
 ## How to use
 install requirements:
@@ -8,6 +8,9 @@ install requirements:
 run script:
 	
 	python repo [option] [name]
+
+### Recommendation
+Use this script via path variables in your system to bypass repetitive script path specification 
 
 ## USAGE: 
 	repo [option] [arg]
