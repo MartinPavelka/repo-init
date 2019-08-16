@@ -7,9 +7,9 @@ install requirements:
 	pip install -r requirements.txt
 change values:
 
-	path = "YOUR_LOCAL_PROJECTS_REPOSITORY" # Your local projects directory
-	token= "YOUR_GITHUB_TOKEN" # Your github token
-	origin = r.create_remote('origin', "Your_GITHUB_Address"+ repo_name +".git")
+	path	= "YOUR_LOCAL_PROJECTS_REPOSITORY" # Your local projects directory
+	token	= "YOUR_GITHUB_TOKEN" # Your github token
+	origin	= r.create_remote('origin', "Your_GITHUB_Address"+ repo_name +".git")
 run script:
 	
 	python repo [option] [name]
