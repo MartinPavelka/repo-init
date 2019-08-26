@@ -14,7 +14,17 @@ run script:
 	
 	python repo [option] [name]
 ### Recommendation
-Use this script via path variables in your system to bypass repetitive script path specification 
+
+#### Windows users
+Associate the correct file group with .py scripts:
+
+	assoc .py=Python.File
+Redirect all Python files to the new executable:
+
+	ftype Python.File=C:\Path\to\python.exe "%1" %*
+Add script location to Windows environment variables
+
+	Search **Advanced system settings** > **Environment Variables** > **System Variables** > **PATH (edit)** > **Add** > C:\Path\to\script\ > OK
 
 ## USAGE: 
 	repo [option] [arg]
